@@ -1,0 +1,17 @@
+
+# Playwright
+node_modules/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+target/
+test-results/
+
+# npm install --save-dev @serenity-js/core @serenity-js/web @serenity-js/playwright @serenity-js/assertions @serenity-js/console-reporter @serenity-js/serenity-bdd
+# npm install --save-dev @serenity-js/playwright-test
+
+# npx serenity-bdd update
+# npx serenity-bdd run
+
+

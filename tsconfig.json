@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    
+    // --- ESTAS SON LAS LÍNEAS QUE ARREGLAN EL ROJO ---
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "ignoreDeprecations": "6.0",
+    // -------------------------------------------------
+
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    
+    // Mantenemos baseUrl porque usas los alias '@/'
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
