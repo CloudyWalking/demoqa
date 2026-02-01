@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "clean": "rimraf target",
+    "initSerenity": "npx serenity-bdd update",
+    "test": "npm run clean && npx playwright test --project=chromium --headed && npm run initSerenity",
+    "report": "npx serenity-bdd run",
+    "test:full": "npm run test && npm run report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,6 +23,7 @@
     "@serenity-js/playwright-test": "^3.39.0",
     "@serenity-js/serenity-bdd": "^3.39.0",
     "@serenity-js/web": "^3.39.0",
-    "@types/node": "^25.1.0"
+    "@types/node": "^25.1.0",
+    "rimraf": "^6.1.2"
   }
 }

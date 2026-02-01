@@ -1,18 +1,27 @@
 import { defineConfig, devices } from "@playwright/test";
+import type {
+  SerenityFixtures,
+  SerenityWorkerFixtures,
+} from "@serenity-js/playwright-test";
 
-export default defineConfig({
+export default defineConfig<SerenityFixtures, SerenityWorkerFixtures>({
   testDir: "./tests",
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : undefined,
+  use: {
+    trace: "on-first-retry",
+    baseURL: "https://demoqa.com",
+    crew: [
+      ["@serenity-js/web:Photographer", { strategy: "TakePhotosOfFailures" }],
+    ],
+    defaultActorName: "Alice",
+  },
   reporter: [
-    ["line"], 
     [
       "@serenity-js/playwright-test",
       {
         specDirectory: "./tests",
-        reporters: [
+        crew: [
           "@serenity-js/console-reporter",
           ["@serenity-js/serenity-bdd", { specDirectory: "./tests" }],
           [
@@ -23,25 +32,34 @@ export default defineConfig({
       },
     ],
   ],
-  use: {
-    trace: "on-first-retry",
-    baseURL: "https://demoqa.com/",
-  },
-
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        crew: [
+          [
+            "@serenity-js/web:Photographer",
+            { strategy: "TakePhotosOfInteractions" },
+          ],
+        ],
+      },
     },
-
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"] },
     },
-
     {
       name: "webkit",
-      use: { ...devices["Desktop Safari"] },
+      use: {
+        ...devices["Desktop Safari"],
+        crew: [
+          [
+            "@serenity-js/web:Photographer",
+            { strategy: "TakePhotosOfInteractions" },
+          ],
+        ],
+      },
     },
   ],
 });

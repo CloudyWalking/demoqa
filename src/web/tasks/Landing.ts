@@ -4,5 +4,7 @@ import { LandingUI } from "../ui/LandingUI";
 
 export const Landing = {
   navigateToLandingPage: () => Task.where("Navigate to Landing Page", Navigate.to("/")),
-  openCategoryCard: (categoryName: string) => Task.where("Navigating to ${categoryName} card", Click.on(LandingUI.elementsCard())),
+  clickElementsCard: () => Task.where("Click on elements card", Click.on(LandingUI.elementsCard())),
+  clickFormsCard: () => Task.where("Click on forms card", Click.on(LandingUI.formsCard())),
+  clickAlertsFrameAndWindowsCard: () => Task.where("Click on alerts, frame & windows card", Click.on(LandingUI.alertsFrameAndWindowsCard())),
 };
