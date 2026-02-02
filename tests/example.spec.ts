@@ -1,7 +1,7 @@
 import { Landing } from "../src/web/tasks/Landing";
 import { TheLandingPage } from "../src/web/questions/TheLandingPage";
 import { Ensure, equals, isTrue } from "@serenity-js/assertions";
-import { it } from "@serenity-js/playwright-test";
+import { it, describe } from "@serenity-js/playwright-test";
 import { TextBox } from "../src/web/tasks/TextBox";
 import { Elements } from "../src/web/tasks/Elements";
 import { TheTextBoxPage } from "../src/web/questions/TheTextBoxPage";
@@ -11,8 +11,16 @@ import { ThePracticeFormPage } from "../src/web/questions/ThePracticeFormPage";
 import { Alerts } from "../src/web/tasks/Alerts";
 import { AlertsWindows } from "../src/web/tasks/AlertsWindows";
 import { ModalDialog } from "@serenity-js/web";
+import { Widgets } from "../src/web/tasks/Widgets";
+import { Accordian } from "../src/web/tasks/Accordian";
+import { TheAccordianPage } from "../src/web/questions/TheAccordianPage";
+import { Interaction } from "../src/web/tasks/Interaction";
+import { Droppable } from "../src/web/tasks/Droppable";
+import { TheDroppablePage } from "../src/web/questions/TheDroppablePage";
+import { Books } from "../src/web/tasks/Books";
+import { TheBooksPage } from "../src/web/questions/TheBooksPage";
 
-it.describe("DEMOQA suite", () => {
+describe("DEMOQA suite", () => {
   it.beforeEach(async ({ actor }) => {
     await actor.attemptsTo(Landing.navigateToLandingPage());
   });
@@ -60,21 +68,43 @@ it.describe("DEMOQA suite", () => {
     );
   });
 
-  it("Section Alerts, Frame & Windows", async ({actor})=>{
-      await actor.attemptsTo(
-        Landing.clickAlertsFrameAndWindowsCard(),
-        AlertsWindows.clickAlertsMenuItem(),
-        Alerts.clickAlertButton(),
-        Ensure.that(ModalDialog.lastDialogState(), equals('dismissed')),
-      );
-    });
+  it("Section Alerts, Frame & Windows", async ({ actor }) => {
+    await actor.attemptsTo(
+      Landing.clickAlertsFrameAndWindowsCard(),
+      AlertsWindows.clickAlertsMenuItem(),
+      Alerts.clickAlertButton(),
+      Ensure.that(ModalDialog.lastDialogState(), equals("dismissed")),
+    );
+  });
 
+  it("Section Widgets – Accordion", async ({ actor }) => {
+    await actor.attemptsTo(
+      Landing.clickWidgetsCard(),
+      Widgets.clickAccordionMenuItem(),
+      Ensure.that(TheAccordianPage.firstPanelContentIsVisible(), isTrue()),
+      Accordian.expandSecondAccordianSection(),
+      Ensure.that(TheAccordianPage.secondPanelContentIsVisible(), isTrue()),
+      Accordian.expandThirdAccordianSection(),
+      Ensure.that(TheAccordianPage.thirdPanelContentIsVisible(), isTrue()),
+    );
+  });
 
+  it("Section Interactions – Drag and Drop", async ({ actor }) => {
+    await actor.attemptsTo(
+        Landing.clickInteractionsCard(),  
+        Interaction.clickDroppableMenuItem(),
+        Droppable.dragAndDropElement(),
+        Ensure.that(TheDroppablePage.droppedElementIsPresent(), isTrue()),
+    );
+  });
 
-
-
-
-
+  it("Book Store Application – Búsqueda de Libros", async ({ actor }) => {
+    await actor.attemptsTo(
+        Landing.clickBookStoreApplicationCard(),
+        Books.enterSearchText("Git"),
+        Ensure.that(TheBooksPage.bookTitlesContain('Git'), isTrue())
+    );
+  });
 
 
 });

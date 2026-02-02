@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf target",
     "initSerenity": "npx serenity-bdd update",
-    "test": "npm run clean && npx playwright test --project=chromium --headed && npm run initSerenity",
+    "test": "npm run clean && npx playwright test --project=chromium --headed --trace on && npm run initSerenity",
     "report": "npx serenity-bdd run",
     "test:full": "npm run test && npm run report"
   },
