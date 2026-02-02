@@ -1,91 +1,62 @@
-DemoQA Automation Suite
-This repository contains an automated end-to-end test suite for the DemoQA practice website.
+# DemoQA Automation Suite 
 
-The project is built using TypeScript, Playwright, and Serenity/JS, following the Screenplay Pattern to ensure high readability, scalability, and maintainability of the test code.
+This repository contains an automated end-to-end test suite for the [DemoQA](https://demoqa.com) practice website, built using **Serenity/JS**, **Playwright**, and **TypeScript**.
 
-🛠️ Technology Stack
-Language: TypeScript
+The project implements the **Screenplay Pattern** to ensure scalable, readable, and maintainable test code.
 
-Framework: Serenity/JS
+## 🛠️ Tech Stack
 
-Browser Automation: Playwright
+* **Language:** TypeScript
+* **Framework:** [Serenity/JS](https://serenity-js.org/)
+* **Browser Automation:** Playwright
+* **Assertions:** Serenity/JS Assertions (`Ensure`, `equals`, `isTrue`)
 
-Design Pattern: Screenplay Pattern (Actors, Tasks, Questions)
+##  Test Scenarios Covered
 
-Test Scenarios Covered
-The test suite (DEMOQA suite) covers various sections of the application, validating UI interactions, form handling, and complex user gestures.
+The suite validates various sections of the application, including Form handling, Widgets, Alerts, and Drag & Drop interactions.
 
-1.  Homepage Validation
-Goal: Verify the integrity of the landing page.
+### 1.  Homepage Validation
+* **Objective:** Verify the integrity of the landing page.
+* **Checks:** Ensures the main title is "DEMOQA" and verifies the presence of all navigation cards (Elements, Forms, Alerts, Widgets, Interactions, Book Store).
 
-Checks: Ensures the page title is "DEMOQA" and validates the presence of all main application cards:
+### 2.  Elements: Text Box
+* **Objective:** Verify simple form submission.
+* **Actions:** Navigates to the Text Box section, enters full name and email, and submits.
+* **Validation:** Verifies that the output data is visible after submission.
 
-Elements
+### 3.  Forms: Practice Form
+* **Objective:** Verify complex form interactions.
+* **Actions:** Fills out the Student Registration Form (Name, Gender, Mobile) and submits.
+* **Validation:** Ensures the "Thanks for submitting the form" modal appears.
 
-Forms
+### 4.  Alerts, Frame & Windows
+* **Objective:** Verify native browser alert handling.
+* **Actions:** Triggers a JS Alert and interacts with it using the Actor's abilities.
+* **Validation:** Checks if the dialog was successfully dismissed.
 
-Alerts, Frame & Windows
+### 5.  Widgets: Accordion
+* **Objective:** Verify dynamic UI state changes.
+* **Actions:** Sequentially expands the First, Second, and Third accordion sections.
+* **Validation:** Ensures the content of each panel becomes visible upon interaction.
 
-Widgets
+### 6.  Interactions: Drag and Drop
+* **Objective:** Verify complex mouse gestures.
+* **Actions:** Performs a drag-and-drop operation from a source element to a target zone.
+* **Validation:** Checks if the element is successfully dropped.
 
-Interactions
+### 7.  Book Store: Search
+* **Objective:** Verify data grid filtering.
+* **Actions:** Searches for the keyword "Git".
+* **Validation:** Iterates through the result grid to ensure all displayed book titles contain the search term.
 
-Book Store Application
+##  How to Run
 
-2. Elements: Text Box
-Goal: Validate simple form submission.
+1.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-Actions: Navigates to the Text Box section, fills in the Full Name and Email, and submits the form.
-
-Assertions: Verifies that the output data is visible and matches the input.
-
-3. Forms: Student Registration
-Goal: Test complex form interactions.
-
-Actions: Navigates to the Practice Form, fills in required fields (Name, Last Name, Gender, Mobile Number), and submits.
-
-Assertions: Verifies that the "Thanks for submitting the form" modal appears after successful submission.
-
-4. Alerts, Frame & Windows
-Goal: Validate browser alert handling capabilities.
-
-Actions: Triggers a native browser alert.
-
-Assertions: Ensures the actor can successfully dismiss the dialog and validates the dialog state.
-
-5. Widgets: Accordion
-Goal: Test dynamic UI components.
-
-Actions: Expands different sections of the Accordion widget sequentially.
-
-Assertions: Verifies that the content within the first, second, and third panels becomes visible upon interaction.
-
-6. Interactions: Drag and Drop
-Goal: Validate complex mouse gestures.
-
-Actions: Performs a drag-and-drop operation of an element into a target drop zone.
-
-Assertions: Verifies that the element has been successfully dropped into the target area.
-
-7. Book Store: Search
-Goal: Test data filtering and search functionality.
-
-Actions: Navigates to the Book Store and performs a search for "Git".
-
-Assertions: Validates that all displayed book titles in the result grid contain the search keyword.
-
-How to Run
-Install dependencies:
-
-Bash
-npm install
-Run the tests:
-
-Bash
-npx serenity-js test
-Project Structure
-src/web/tasks: Contains the reusable Tasks (e.g., Landing, TextBox, PracticeForm).
-
-src/web/questions: Contains the Questions used for assertions (e.g., TheLandingPage, TheBooksPage).
-
-specs/: Contains the test specifications (as seen in the code snippet).
+2.  **Run the tests:**
+    ```bash
+    npx serenity-js test
+    ```
