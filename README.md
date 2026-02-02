@@ -58,5 +58,5 @@ The suite validates various sections of the application, including Form handling
 
 2.  **Run the tests:**
     ```bash
-    npx serenity-js test
+    npm run test:full
     ```
